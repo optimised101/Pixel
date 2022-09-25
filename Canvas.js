@@ -193,13 +193,6 @@ class Canvas {
         .catch((error) => {
           console.log(error);
         });
-
-      // var url = URL.createObjectURL(blob);
-      // console.log(url);
-      // var link = document.createElement("a");
-      // link.download = "canvas.png";
-      // link.href = url;
-      // link.click();
     });
   }
 
