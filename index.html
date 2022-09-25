@@ -35,6 +35,8 @@
   <script src="lib/Transformation.js" async></script>
   <script src="lib/gif.js"></script>
   <script src="Canvas.js"></script>
+  <script src="abiAddress.js" type="module"></script>
+
 
   <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
   <script>
@@ -59,21 +61,377 @@
       const signer = provider.getSigner();
       await provider.send("eth_requestAccounts", []);
 
-      console.log(signer)
+      if (signer) {
+        let wallet = document.getElementById("wallet");
+        wallet.innerHTML = "Connected"
+      }
 
+      // NFTee contract address and ABI
+      // const contractAddress = "0x4b2ac3c764fa7BAc6fC76aB20E746D5e066b917B";
+      // const contractABI = [
+      //   {
+      //     "inputs": [],
+      //     "stateMutability": "nonpayable",
+      //     "type": "constructor"
+      //   },
+      //   {
+      //     "anonymous": false,
+      //     "inputs": [
+      //       {
+      //         "indexed": true,
+      //         "internalType": "address",
+      //         "name": "owner",
+      //         "type": "address"
+      //       },
+      //       {
+      //         "indexed": true,
+      //         "internalType": "address",
+      //         "name": "approved",
+      //         "type": "address"
+      //       },
+      //       {
+      //         "indexed": true,
+      //         "internalType": "uint256",
+      //         "name": "tokenId",
+      //         "type": "uint256"
+      //       }
+      //     ],
+      //     "name": "Approval",
+      //     "type": "event"
+      //   },
+      //   {
+      //     "anonymous": false,
+      //     "inputs": [
+      //       {
+      //         "indexed": true,
+      //         "internalType": "address",
+      //         "name": "owner",
+      //         "type": "address"
+      //       },
+      //       {
+      //         "indexed": true,
+      //         "internalType": "address",
+      //         "name": "operator",
+      //         "type": "address"
+      //       },
+      //       {
+      //         "indexed": false,
+      //         "internalType": "bool",
+      //         "name": "approved",
+      //         "type": "bool"
+      //       }
+      //     ],
+      //     "name": "ApprovalForAll",
+      //     "type": "event"
+      //   },
+      //   {
+      //     "anonymous": false,
+      //     "inputs": [
+      //       {
+      //         "indexed": true,
+      //         "internalType": "address",
+      //         "name": "from",
+      //         "type": "address"
+      //       },
+      //       {
+      //         "indexed": true,
+      //         "internalType": "address",
+      //         "name": "to",
+      //         "type": "address"
+      //       },
+      //       {
+      //         "indexed": true,
+      //         "internalType": "uint256",
+      //         "name": "tokenId",
+      //         "type": "uint256"
+      //       }
+      //     ],
+      //     "name": "Transfer",
+      //     "type": "event"
+      //   },
+      //   {
+      //     "inputs": [
+      //       {
+      //         "internalType": "address",
+      //         "name": "to",
+      //         "type": "address"
+      //       },
+      //       {
+      //         "internalType": "uint256",
+      //         "name": "tokenId",
+      //         "type": "uint256"
+      //       }
+      //     ],
+      //     "name": "approve",
+      //     "outputs": [],
+      //     "stateMutability": "nonpayable",
+      //     "type": "function"
+      //   },
+      //   {
+      //     "inputs": [
+      //       {
+      //         "internalType": "address",
+      //         "name": "owner",
+      //         "type": "address"
+      //       }
+      //     ],
+      //     "name": "balanceOf",
+      //     "outputs": [
+      //       {
+      //         "internalType": "uint256",
+      //         "name": "",
+      //         "type": "uint256"
+      //       }
+      //     ],
+      //     "stateMutability": "view",
+      //     "type": "function"
+      //   },
+      //   {
+      //     "inputs": [
+      //       {
+      //         "internalType": "uint256",
+      //         "name": "tokenId",
+      //         "type": "uint256"
+      //       }
+      //     ],
+      //     "name": "getApproved",
+      //     "outputs": [
+      //       {
+      //         "internalType": "address",
+      //         "name": "",
+      //         "type": "address"
+      //       }
+      //     ],
+      //     "stateMutability": "view",
+      //     "type": "function"
+      //   },
+      //   {
+      //     "inputs": [
+      //       {
+      //         "internalType": "address",
+      //         "name": "owner",
+      //         "type": "address"
+      //       },
+      //       {
+      //         "internalType": "address",
+      //         "name": "operator",
+      //         "type": "address"
+      //       }
+      //     ],
+      //     "name": "isApprovedForAll",
+      //     "outputs": [
+      //       {
+      //         "internalType": "bool",
+      //         "name": "",
+      //         "type": "bool"
+      //       }
+      //     ],
+      //     "stateMutability": "view",
+      //     "type": "function"
+      //   },
+      //   {
+      //     "inputs": [
+      //       {
+      //         "internalType": "string",
+      //         "name": "tokenURI",
+      //         "type": "string"
+      //       }
+      //     ],
+      //     "name": "mintNFT",
+      //     "outputs": [
+      //       {
+      //         "internalType": "uint256",
+      //         "name": "",
+      //         "type": "uint256"
+      //       }
+      //     ],
+      //     "stateMutability": "nonpayable",
+      //     "type": "function"
+      //   },
+      //   {
+      //     "inputs": [],
+      //     "name": "name",
+      //     "outputs": [
+      //       {
+      //         "internalType": "string",
+      //         "name": "",
+      //         "type": "string"
+      //       }
+      //     ],
+      //     "stateMutability": "view",
+      //     "type": "function"
+      //   },
+      //   {
+      //     "inputs": [
+      //       {
+      //         "internalType": "uint256",
+      //         "name": "tokenId",
+      //         "type": "uint256"
+      //       }
+      //     ],
+      //     "name": "ownerOf",
+      //     "outputs": [
+      //       {
+      //         "internalType": "address",
+      //         "name": "",
+      //         "type": "address"
+      //       }
+      //     ],
+      //     "stateMutability": "view",
+      //     "type": "function"
+      //   },
+      //   {
+      //     "inputs": [
+      //       {
+      //         "internalType": "address",
+      //         "name": "from",
+      //         "type": "address"
+      //       },
+      //       {
+      //         "internalType": "address",
+      //         "name": "to",
+      //         "type": "address"
+      //       },
+      //       {
+      //         "internalType": "uint256",
+      //         "name": "tokenId",
+      //         "type": "uint256"
+      //       }
+      //     ],
+      //     "name": "safeTransferFrom",
+      //     "outputs": [],
+      //     "stateMutability": "nonpayable",
+      //     "type": "function"
+      //   },
+      //   {
+      //     "inputs": [
+      //       {
+      //         "internalType": "address",
+      //         "name": "from",
+      //         "type": "address"
+      //       },
+      //       {
+      //         "internalType": "address",
+      //         "name": "to",
+      //         "type": "address"
+      //       },
+      //       {
+      //         "internalType": "uint256",
+      //         "name": "tokenId",
+      //         "type": "uint256"
+      //       },
+      //       {
+      //         "internalType": "bytes",
+      //         "name": "data",
+      //         "type": "bytes"
+      //       }
+      //     ],
+      //     "name": "safeTransferFrom",
+      //     "outputs": [],
+      //     "stateMutability": "nonpayable",
+      //     "type": "function"
+      //   },
+      //   {
+      //     "inputs": [
+      //       {
+      //         "internalType": "address",
+      //         "name": "operator",
+      //         "type": "address"
+      //       },
+      //       {
+      //         "internalType": "bool",
+      //         "name": "approved",
+      //         "type": "bool"
+      //       }
+      //     ],
+      //     "name": "setApprovalForAll",
+      //     "outputs": [],
+      //     "stateMutability": "nonpayable",
+      //     "type": "function"
+      //   },
+      //   {
+      //     "inputs": [
+      //       {
+      //         "internalType": "bytes4",
+      //         "name": "interfaceId",
+      //         "type": "bytes4"
+      //       }
+      //     ],
+      //     "name": "supportsInterface",
+      //     "outputs": [
+      //       {
+      //         "internalType": "bool",
+      //         "name": "",
+      //         "type": "bool"
+      //       }
+      //     ],
+      //     "stateMutability": "view",
+      //     "type": "function"
+      //   },
+      //   {
+      //     "inputs": [],
+      //     "name": "symbol",
+      //     "outputs": [
+      //       {
+      //         "internalType": "string",
+      //         "name": "",
+      //         "type": "string"
+      //       }
+      //     ],
+      //     "stateMutability": "view",
+      //     "type": "function"
+      //   },
+      //   {
+      //     "inputs": [
+      //       {
+      //         "internalType": "uint256",
+      //         "name": "tokenId",
+      //         "type": "uint256"
+      //       }
+      //     ],
+      //     "name": "tokenURI",
+      //     "outputs": [
+      //       {
+      //         "internalType": "string",
+      //         "name": "",
+      //         "type": "string"
+      //       }
+      //     ],
+      //     "stateMutability": "view",
+      //     "type": "function"
+      //   },
+      //   {
+      //     "inputs": [
+      //       {
+      //         "internalType": "address",
+      //         "name": "from",
+      //         "type": "address"
+      //       },
+      //       {
+      //         "internalType": "address",
+      //         "name": "to",
+      //         "type": "address"
+      //       },
+      //       {
+      //         "internalType": "uint256",
+      //         "name": "tokenId",
+      //         "type": "uint256"
+      //       }
+      //     ],
+      //     "name": "transferFrom",
+      //     "outputs": [],
+      //     "stateMutability": "nonpayable",
+      //     "type": "function"
+      //   }
+      // ];
 
-
+      // const NFTeeContract = new ethers.Contract(contractAddress, contractABI, signer);
+      // const tx = await NFTeeContract.mintNFT("https://images.squarespace-cdn.com/content/v1/534a969fe4b01ccabb38e0df/1568056567813-YNZ6T23MDEUQ23ISUQYR/Sonic.jpg");
+      // console.log(`Transaction hash: ${tx.hash}`);
 
     };
 
 
-
-
-    // (async function () {
-    //   let userAddress = await signer.getAddress();
-    //   document.getElementById("wallet").innerText =
-    //     "Your wallet is " + userAddress;
-    // })();
   </script>
 
 
@@ -120,6 +478,9 @@
     <span class="item" onclick="board.addImage()"><i class="fa fa-upload"></i></span>
     <span class="item" onclick="Frames.open()"><i class="fas fa-eye"></i></span>
   </div>
+
+  <!-- MINT -->
+
   <div id="palette"></div>
   <div id="color-settings-popup" style="display: none;">
     <span onclick="document.getElementById('color-settings-popup').style.display = 'none';" class="close"><i
@@ -137,12 +498,15 @@
       <button onClick="connectWallet()" class="text-black border-2 border-black p-4 grid grid-cols-12 items-center">
 
         <div class="col-span-10">
-          <span class="text-md sm:text-xl">MetaMask</span>
+          <span class="text-md sm:text-xl" id="wallet">MetaMask</span>
         </div>
       </button>
       <button class="text-black border-2 border-black p-4 grid grid-cols-12 items-center">
     </div>
   </div>
+
+  <button style="position:relative; top:100px 
+   ; left:50%">MINTTTT</button>
 </body>
 <script type="text/javascript">
 
