@@ -30,7 +30,17 @@ body {
 
 #popup,
 #frames {
-  background-color: #332f35;
+  /* background-color: #332f35; */
+  background-image: radial-gradient(
+    circle 976px at 51.2% 51%,
+    rgba(11, 27, 103, 1) 0%,
+    rgba(16, 66, 157, 1) 0%,
+    rgba(11, 27, 103, 1) 17.3%,
+    rgba(11, 27, 103, 1) 58.8%,
+    rgba(11, 27, 103, 1) 71.4%,
+    rgba(16, 66, 157, 1) 100.2%,
+    rgba(187, 187, 187, 1) 100.2%
+  );
   color: white;
   font-size: 20px;
   padding: 30px;
@@ -154,16 +164,15 @@ body {
 }
 
 #close {
-  background-color: #262327;
+  /* background-color: #262327; */
   color: white;
   margin: 15px auto 5px auto;
-  padding: 5px 10px 5px 10px;
-  font-size: 18px;
+  padding: 10px;
+  font-size: 20px;
   font-weight: bolder;
   display: block;
   border: none;
   border-radius: 3px;
-  max-width: 60px;
   transition: 0.2s all;
 }
 
@@ -191,7 +200,7 @@ body {
 #toolbar {
   position: fixed;
   top: 50%;
-  left: 0%;
+  left: 10px;
   transform: translateY(-50%);
   padding: 0px;
   color: white;
@@ -200,7 +209,6 @@ body {
 
 #toolbar .item {
   display: inline-block;
-  float: left;
   padding: 15px;
   border: 1px solid #fff;
   cursor: pointer;
@@ -213,7 +221,7 @@ body {
 #palette {
   position: fixed;
   top: 25%;
-  right: 0%;
+  right: 10px;
   /* transform: translateY(-50%); */
   padding: 0px;
   color: white;
@@ -321,4 +329,26 @@ path {
   .menu {
     top: 110px;
   }
+}
+
+.walletButton {
+  padding: 10px;
+  color: #fff;
+  font-size: 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #370532;
+  border: 1px solid black;
+}
+
+.popupButton {
+  padding: 10px;
+  color: #fff;
+  font-size: 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #370532;
+  border: 1px solid black;
 }
