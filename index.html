@@ -44,12 +44,29 @@
         window.ethereum,
         "any"
       );
-      await provider.send("eth_requestAccounts", []);
+
+      window.ethereum.request({
+        id: 1,
+        jsonrpc: "2.0",
+        method: "wallet_switchEthereumChain",
+        params: [
+          {
+            chainId: "0x152",
+          },
+        ],
+      });
+
       const signer = provider.getSigner();
+      await provider.send("eth_requestAccounts", []);
 
       console.log(signer)
 
-    }
+
+
+
+    };
+
+
 
 
     // (async function () {
