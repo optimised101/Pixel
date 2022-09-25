@@ -34,8 +34,6 @@ const mintNFT = async () => {
   btn.style.display = "none";
   spinner.style.display = "block";
 
-  // upload pixel art to IPFS
-
   // NFTee contract address and ABI
   const contractAddress = "0x4b2ac3c764fa7BAc6fC76aB20E746D5e066b917B";
   const contractABI = [
@@ -401,11 +399,13 @@ const mintNFT = async () => {
     signer
   );
 
+  // upload pixel art to IPFS and mint nft
+  let r = await board.save();
+  const url = `ipfs://${r.value.cid}`;
+
   try {
-    const tx = await NFTeeContract.mintNFT(
-      "https://images.squarespace-cdn.com/content/v1/534a969fe4b01ccabb38e0df/1568056567813-YNZ6T23MDEUQ23ISUQYR/Sonic.jpg"
-    );
-    console.log(`Transaction hash: ${tx.hash}`);
+    const tx = await NFTeeContract.mintNFT(url);
+    await tx.wait();
     alert("You have successfully minted a cool pixle art");
   } catch (error) {
     alert("Something went wrong");

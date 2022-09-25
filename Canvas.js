@@ -169,31 +169,32 @@ class Canvas {
     });
   }
 
-  save() {
-    this.canvas.toBlob(function (blob) {
-      const formData = new FormData();
-      formData.append("file", blob);
-      console.log(formData.get("file"));
-      fetch("https://api.nft.storage/upload", {
-        method: "POST",
-        body: formData,
-        headers: {
-          Accept: "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweEY5YjA3NWQ1OWRGRGNhMjJBMDNEZDMyMmZFNDZjYjg1ZkYwY0I0NmMiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY0MDMwMDk2ODA2MCwibmFtZSI6Ik1JTlRFUiJ9.pwZFcGfgSSVO7pjnRW31fShXABCsIzYz1GVYmeRm9W8",
-        },
-      })
-        .then((res) => {
-          console.log(res);
-          return res.json();
-        })
-        .then((json) => {
-          console.log(json);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+  getCanvasBlob() {
+    return new Promise(function (resolve, reject) {
+      document.getElementById("canvas").toBlob(function (blob) {
+        resolve(blob);
+      });
     });
+  }
+
+  async save() {
+    const blob = await this.getCanvasBlob();
+
+    const formData = new FormData();
+    formData.append("file", blob);
+    console.log("FFFF", formData.get("file"));
+
+    const res = await fetch("https://api.nft.storage/upload", {
+      method: "POST",
+      body: formData,
+      headers: {
+        Accept: "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweEY5YjA3NWQ1OWRGRGNhMjJBMDNEZDMyMmZFNDZjYjg1ZkYwY0I0NmMiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY0MDMwMDk2ODA2MCwibmFtZSI6Ik1JTlRFUiJ9.pwZFcGfgSSVO7pjnRW31fShXABCsIzYz1GVYmeRm9W8",
+      },
+    });
+    const json = await res.json();
+    return json;
   }
 
   clear() {
