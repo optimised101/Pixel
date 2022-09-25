@@ -400,10 +400,16 @@ const mintNFT = async () => {
     contractABI,
     signer
   );
-  const tx = await NFTeeContract.mintNFT(
-    "https://images.squarespace-cdn.com/content/v1/534a969fe4b01ccabb38e0df/1568056567813-YNZ6T23MDEUQ23ISUQYR/Sonic.jpg"
-  );
-  console.log(`Transaction hash: ${tx.hash}`);
+
+  try {
+    const tx = await NFTeeContract.mintNFT(
+      "https://images.squarespace-cdn.com/content/v1/534a969fe4b01ccabb38e0df/1568056567813-YNZ6T23MDEUQ23ISUQYR/Sonic.jpg"
+    );
+    console.log(`Transaction hash: ${tx.hash}`);
+    alert("You have successfully minted a cool pixle art");
+  } catch (error) {
+    alert("Something went wrong");
+  }
 
   btn.style.display = "block";
   spinner.style.display = "none";
