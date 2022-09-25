@@ -1,3 +1,5 @@
+var isMint = false;
+
 class Canvas {
   constructor(width, height) {
     this.canvas = document.querySelector("#canvas");
@@ -26,6 +28,7 @@ class Canvas {
     //  between a click and a mouse-drag + click
 
     this.canvas.addEventListener("mousemove", (e) => {
+      isMint = true;
       if (this.active) {
         var rect = this.canvas.getBoundingClientRect();
         var x = e.clientX - rect.left;
@@ -45,6 +48,7 @@ class Canvas {
     });
 
     this.canvas.addEventListener("touchmove", (e) => {
+      isMint = true;
       var rect = this.canvas.getBoundingClientRect();
       var x = e.touches[0].clientX - rect.left;
       var y = e.touches[0].clientY - rect.top;

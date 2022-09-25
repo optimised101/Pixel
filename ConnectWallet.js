@@ -28,6 +28,11 @@ const mintNFT = async () => {
     alert("Please connect you wallet");
     return;
   }
+  if (!isMint) {
+    alert("Draw somethinng cool before mint boii");
+    return;
+  }
+
   let btn = document.getElementById("mintButton");
   let spinner = document.getElementById("spinner");
 
